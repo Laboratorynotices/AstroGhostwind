@@ -1,0 +1,13 @@
+---
+import NavContainerLayout from "./NavContainerLayout.astro";
+import SubscribeContainerLayout from "./SubscribeContainerLayout.astro";
+import AuthorContainerLayout from "./AuthorContainerLayout.astro";
+---
+
+<div class="border border-yellow-900 rounded">
+    ContainerLayout
+    <NavContainerLayout />
+    <slot />
+    <SubscribeContainerLayout />
+    <AuthorContainerLayout />
+</div>

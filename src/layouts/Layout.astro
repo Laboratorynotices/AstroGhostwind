@@ -1,0 +1,39 @@
+---
+import HeaderLayout from "./HeaderLayout.astro";
+import ContainerLayout from "./ContainerLayout.astro";
+import FooterLayout from "./FooterLayout.astro";
+
+// Определяем тип данных, которые мы ожидаем
+interface Props {
+	title: string;
+	description?: string;
+	keywords?: string;
+}
+
+// Получение данных
+const {
+	title = "Страница AstroGhostwind",
+	description,
+	keywords
+} = Astro.props as Props;
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{ title }</title>
+		{!!description && <meta name="description" content={description} />}
+		{!!keywords && <meta name="keywords" content={keywords} />}
+	</head>
+	<body>
+		<HeaderLayout />
+		<ContainerLayout>
+			<slot />
+		</ContainerLayout>
+		<FooterLayout />
+	</body>
+</html>
