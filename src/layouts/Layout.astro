@@ -19,21 +19,33 @@ const {
 
 ---
 
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{ title }</title>
-		{!!description && <meta name="description" content={description} />}
-		{!!keywords && <meta name="keywords" content={keywords} />}
-	</head>
-	<body>
-		<HeaderLayout />
-		<ContainerLayout>
-			<slot />
-		</ContainerLayout>
-		<FooterLayout />
-	</body>
+<head>
+    <meta charset="UTF-8">
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="generator" content={Astro.generator} />
+	<title>{ title }</title>
+	{!!description && <meta name="description" content={description} />}
+	{!!keywords && <meta name="keywords" content={keywords} />}
+	<link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/> <!--Replace with your tailwind.css once created-->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel="stylesheet">
+			
+</head>
+<body class="bg-gray-200 font-sans leading-normal tracking-normal">
+	<HeaderLayout />
+	<ContainerLayout>
+		<slot />
+	</ContainerLayout>
+	<FooterLayout />
+
+	<script is:inline src="https://unpkg.com/popper.js@1/dist/umd/popper.min.js"></script>
+	<script is:inline src="https://unpkg.com/tippy.js@4"></script>
+	<script is:inline>
+		//Init tooltips
+		tippy('.avatar')
+	</script>
+</body>
 </html>
