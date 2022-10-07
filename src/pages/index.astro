@@ -1,5 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import LeadCard from "../components/LeadCard.astro";
+import { IProduct } from "../types";
+
+// Получаем данные с сайта
+const response = await fetch('http://fakestoreapi.com/products?limit=8');
+// Переделываем данные в список JSON-объектов
+const products = await response.json() as IProduct[];
+// Отделяем первый продукт для первой карточки
+const firstProduct = products.shift();
 ---
 
 <Layout
@@ -7,5 +16,13 @@ import Layout from "../layouts/Layout.astro";
 	description="Описание сайта"
 	keywords="разные, ключевые, слова"
 >
+	<LeadCard
+		category	= {firstProduct.category}
+		description	= {firstProduct.description}
+		id			= {firstProduct.id}
+		image		= {firstProduct.image}
+		price		= {firstProduct.price}
+		title		= {firstProduct.title}
+	/>
 	<h1>Astro</h1>
 </Layout>
