@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import LeadCard from "../components/LeadCard.astro";
 import Card from "../components/Card.astro";
-import { IProduct } from "../types";
+import { IProduct, widthClasses } from "../types";
 
 // Получаем данные с сайта
 const response = await fetch("http://fakestoreapi.com/products?limit=8");
@@ -12,14 +12,14 @@ const products = (await response.json()) as IProduct[];
 const firstProduct = products.shift();
 
 // Список ширин карточек, в том порядке, в котором они будут показываться
-const widthClassesOfCards: string[] = [
-	"w-1/3",
-	"w-1/3",
-	"w-1/3",
-	"w-1/2",
-	"w-1/2",
-	"w-2/3",
-	"w-1/3",
+const widthClassesOfCards: widthClasses[] = [
+	widthClasses["w-1/3"],
+	widthClasses["w-1/3"],
+	widthClasses["w-1/3"],
+	widthClasses["w-1/2"],
+	widthClasses["w-1/2"],
+	widthClasses["w-2/3"],
+	widthClasses["w-1/3"],
 ];
 ---
 
@@ -29,23 +29,13 @@ const widthClassesOfCards: string[] = [
 	keywords="разные, ключевые, слова"
 >
 	<LeadCard
-		category={firstProduct.category}
-		description={firstProduct.description}
-		id={firstProduct.id}
-		image={firstProduct.image}
-		price={firstProduct.price}
-		title={firstProduct.title}
+		product={firstProduct}
 	/>
 	<div class="flex flex-wrap justify-between pt-12 -mx-6">
 		{
 			products.map((products, index) => (
 				<Card
-					category={products.category}
-					description={products.description}
-					id={products.id}
-					image={products.image}
-					price={products.price}
-					title={products.title}
+					product={products}
 					widthClass={widthClassesOfCards[index]}
 				/>
 			))
