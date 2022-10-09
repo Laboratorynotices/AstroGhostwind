@@ -6,5 +6,5 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   integrations: [tailwind()],
   site: 'https://laboratorynotices.github.io',
-  base: '/AstroGhostwind/dist',
+  base: '/AstroGhostwind',
 });
