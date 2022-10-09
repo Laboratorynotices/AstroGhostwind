@@ -29,7 +29,7 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v0
         with:
-            path: PATH_TO_ROOT
+            path: /dist
 
   deploy:
     needs: build
