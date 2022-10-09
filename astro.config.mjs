@@ -5,6 +5,4 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind()],
-  site: 'https://laboratorynotices.github.io',
-  base: '/AstroGhostwind',
 });
