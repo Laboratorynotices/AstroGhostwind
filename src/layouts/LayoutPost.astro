@@ -1,0 +1,82 @@
+---
+import { IProduct } from "../types";
+import CardboardLayoutPost from "./CardboardLayoutPost.astro";
+import ContainerLayoutPost from "./ContainerLayoutPost.astro";
+import FooterLayout from "./FooterLayout.astro";
+import HTMLHead from "./HTMLHead.astro";
+import NavLayoutPost from "./NavLayoutPost.astro";
+import SlideInNavLayoutPost from "./SlideInNavLayoutPost.astro";
+
+// Определяем тип данных, которые мы ожидаем
+interface Props {
+	product: IProduct;
+}
+
+// Получение данных
+const {
+	product,
+} = Astro.props as Props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<HTMLHead
+		title={product.title+" - Страница Post. AstroGhostwind."}
+		description={product.description}
+		keywords={product.title+", "+product.category}>
+		<style>
+			.smooth {
+				transition: box-shadow 0.3s ease-in-out;
+			}
+			::selection {
+				background-color: aliceblue;
+			}
+		</style>
+	</HTMLHead>
+	<body class="bg-white font-sans leading-normal tracking-normal">
+		<NavLayoutPost />
+		<SlideInNavLayoutPost />
+
+		<slot name="beforeContainer" />
+
+		<ContainerLayoutPost>
+			<slot />
+		</ContainerLayoutPost>
+
+		<CardboardLayoutPost />
+		<FooterLayout />
+		<script is:inline>
+			/* Progress bar */
+			//Source: https://alligator.io/js/progress-bar-javascript-css-variables/
+			var h = document.documentElement,
+				b = document.body,
+				st = "scrollTop",
+				sh = "scrollHeight",
+				progress = document.querySelector("#progress"),
+				scroll;
+			var scrollpos = window.scrollY;
+			var header = document.getElementById("header");
+
+			document.addEventListener("scroll", function () {
+				/*Refresh scroll % width*/
+				scroll =
+					((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) *
+					100;
+				progress.style.setProperty("--scroll", scroll + "%");
+
+				/*Apply classes for slide in bar*/
+				scrollpos = window.scrollY;
+
+				if (scrollpos > 100) {
+					header.classList.remove("hidden");
+					header.classList.remove("fadeOutUp");
+					header.classList.add("slideInDown");
+				} else {
+					header.classList.remove("slideInDown");
+					header.classList.add("fadeOutUp");
+					header.classList.add("hidden");
+				}
+			});
+		</script>
+	</body>
+</html>

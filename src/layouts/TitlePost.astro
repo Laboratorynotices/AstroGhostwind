@@ -1,0 +1,22 @@
+---
+// Определяем тип данных, которые мы ожидаем
+interface Props {
+	category: string;
+	title: string;
+}
+
+// Получение данных
+const {
+	category,
+	title,
+} = Astro.props as Props;
+---
+
+<div class="text-center pt-16 md:pt-32">
+	<p class="text-sm md:text-base text-green-500 font-bold uppercase">
+		08 APRIL 2019 <span class="text-gray-900">/</span> {category}
+	</p>
+	<h1 class="font-bold break-normal text-3xl md:text-5xl">
+		{title}
+	</h1>
+</div>

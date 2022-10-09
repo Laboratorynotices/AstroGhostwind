@@ -1,0 +1,28 @@
+---
+// Определяем тип данных, которые мы ожидаем
+interface Props {
+	title: string;
+	description?: string;
+	keywords?: string;
+}
+
+// Получение данных
+const {
+	title = "Страница AstroGhostwind",
+	description,
+	keywords
+} = Astro.props as Props;
+---
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="generator" content={Astro.generator} />
+	<title>{ title }</title>
+	{!!description && <meta name="description" content={description} />}
+	{!!keywords && <meta name="keywords" content={keywords} />}
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel="stylesheet">
+	<slot />		
+</head>

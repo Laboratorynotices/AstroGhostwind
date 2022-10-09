@@ -1,4 +1,5 @@
 ---
+import HTMLHead from "./HTMLHead.astro";
 import HeaderLayout from "./HeaderLayout.astro";
 import ContainerLayout from "./ContainerLayout.astro";
 import FooterLayout from "./FooterLayout.astro";
@@ -16,24 +17,15 @@ const {
 	description,
 	keywords
 } = Astro.props as Props;
-
 ---
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="generator" content={Astro.generator} />
-	<title>{ title }</title>
-	{!!description && <meta name="description" content={description} />}
-	{!!keywords && <meta name="keywords" content={keywords} />}
-	<link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/> <!--Replace with your tailwind.css once created-->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel="stylesheet">
-			
-</head>
+<HTMLHead
+	title={title}
+	description={description}
+	keywords={keywords}
+/>
 <body class="bg-gray-200 font-sans leading-normal tracking-normal">
 	<HeaderLayout />
 	<ContainerLayout>

@@ -1,0 +1,16 @@
+---
+// Определяем тип данных, которые мы ожидаем
+interface Props {
+	image: string;
+}
+
+// Получение данных
+const {
+	image
+} = Astro.props as Props;
+---
+
+<div
+    class="container w-full max-w-6xl mx-auto bg-white bg-cover mt-8 rounded"
+    style={"background-image:url('"+image+"'); height: 75vh;"}
+></div>

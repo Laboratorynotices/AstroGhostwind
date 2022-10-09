@@ -1,0 +1,23 @@
+---
+import CardPost from "../components/CardPost.astro";
+import { IProduct } from "../types";
+
+// Получаем данные с сайта
+const response = await fetch("http://fakestoreapi.com/products?limit=3");
+// Переделываем данные в список JSON-объектов
+const products = (await response.json()) as IProduct[];
+---
+
+<div class="bg-gray-200">
+	<div class="container w-full max-w-6xl mx-auto px-2 py-8">
+		<div class="flex flex-wrap -mx-2">
+			{
+				products.map((products) => (
+					<CardPost
+						product={products}
+					/>
+				))
+			}
+		</div>
+	</div>
+</div>

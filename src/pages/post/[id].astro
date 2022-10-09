@@ -1,0 +1,50 @@
+---
+import ImagePost from "../../layouts/ImagePost.astro";
+import LayoutPost from "../../layouts/LayoutPost.astro";
+import TitlePost from "../../layouts/TitlePost.astro";
+import { IProduct } from "../../types";
+
+/**
+ * Обязательная функция, в которой указывается от куда брать данные.
+ */
+export async function getStaticPaths() {
+	// Получаем данные с сайта (сколько данных, столько и страниц)
+	const response = await fetch("http://fakestoreapi.com/products?limit=8");
+	// Переделываем данные в список JSON-объектов
+	const products = (await response.json()) as IProduct[];
+
+	// Возвращаем данные в строгом формате
+	return products.map((product) => ({
+		// Уникальное значение, которое отличает данные,
+		// параметр страниц, которые нужны для вызова страницы.
+		params: { id: product.id.toString() },
+		// Данные, которые получаем, и которые понадобятся
+		props: { product },
+	}));
+}
+
+// Описание структуры, которые мы получаем
+interface Props {
+	product: IProduct;
+}
+
+// А вот эти переменные мы уже сможем использовать в тексте.
+const { id } = Astro.params;
+const { product } = Astro.props as Props;
+---
+
+<LayoutPost
+	product={product}
+>
+	<TitlePost 
+		title={product.title}
+		category={product.category}
+		slot="beforeContainer" />
+	<ImagePost image={product.image} slot="beforeContainer" />
+
+	<p class="text-2xl md:text-3xl mb-5">{product.description}</p>
+
+	<p class="py-6">{product.description}</p>
+
+	<p class="py-6">{product.description}</p>
+</LayoutPost>
